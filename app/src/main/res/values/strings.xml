@@ -1,4 +1,22 @@
 <resources>
-    <string name="app_name">Lesson20</string>
+    <string name="app_name">Weather</string>
     <string name="api_key">2cd4c78dd8b7ad2a8395e5805c60fc48</string>
+    <string name="nodata">Нет доступа к данным</string>
+    <string name="california_us">California, US</string>
+    <string name="now">Now</string>
+    <string name="degreeformat">%1s°</string>
+    <string name="today">Today</string>
+    <string name="percentformat">%1$d%%</string>
+    <string name="feels_like">feels like</string>
+    <string name="thisweek">This Week</string>
+    <string name="wind">Wind</string>
+    <string name="windformat">%1sm/s</string>
+    <string name="humidity">Humidity</string>
+    <string name="sunrise">Sunrise</string>
+    <string name="pressure">Pressure</string>
+    <string name="pressureformat">%1smb</string>
+    <string name="cloudiness">Cloudiness</string>
+    <string name="sunset">Sunset</string>
+    <string name="update">Обновить</string>
+    <string name="network_error">Сетевое подключение недоступно.</string>
 </resources>

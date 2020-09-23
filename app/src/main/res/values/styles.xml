@@ -5,6 +5,25 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowTranslucentStatus">true</item>
+       </style>
+
+    <style name="textViewPrimary">
+        <item name="android:textSize">24sp</item>
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:fontFamily">@font/sf_pro_display_bold</item>
+    </style>
+
+    <style name="textViewSecondary">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:fontFamily">@font/sf_pro_display_bold</item>
+    </style>
+
+    <style name="textViewThirdly" parent="textViewSecondary">
+        <item name="android:fontFamily">@font/sf_pro_text_regular</item>
     </style>
 
 </resources>
