@@ -8,7 +8,7 @@ import android.os.Bundle
 import android.view.View
 import com.example.lesson20.R
 import com.example.lesson20.data.model.RvAdapter
-import com.example.lesson20.data.model.forecast.ForecastModel
+import com.example.lesson20.data.model.ForecastModel
 import com.example.lesson20.utils.ConnectionUtils
 import com.example.lesson20.utils.DateTimeUtils
 import com.example.lesson20.utils.PermissionUtils
@@ -16,8 +16,6 @@ import com.google.android.gms.location.LocationServices
 import com.google.android.material.snackbar.Snackbar
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_main.*
-import java.text.SimpleDateFormat
-import java.util.*
 
 class MainActivity : AppCompatActivity(), MainContract.View {
 
@@ -33,6 +31,7 @@ class MainActivity : AppCompatActivity(), MainContract.View {
         checkPermissions()
         formatDate()
         setupRecycler()
+        fillViews()
         showSnackBar()
     }
 
@@ -88,8 +87,8 @@ class MainActivity : AppCompatActivity(), MainContract.View {
     private fun loadLocation() {
         val fpc = LocationServices.getFusedLocationProviderClient(applicationContext)
 
-        fpc.lastLocation.addOnSuccessListener {
-            loadByLocation(it)
+        fpc.lastLocation.addOnSuccessListener {location ->
+            location?.let { loadByLocation(it) }
         }.addOnFailureListener {
             val location = Location("")
             location.latitude = 42.78
@@ -98,28 +97,33 @@ class MainActivity : AppCompatActivity(), MainContract.View {
         }
     }
 
-    override fun fillViews(result: ForecastModel?) {
+    private fun fillViews() {
         runOnUiThread {
-            adapter.update(result?.daily)
-            tvLocation.text = result?.timezone
-            tvCurrentTemp.text =
-                getString(R.string.degreeformat, result?.current?.temp?.toInt().toString())
-            tvFeelsTemp.text =
-                getString(R.string.degreeformat, result?.current?.feels_like?.toInt().toString())
-            tvWindDesc.text =
-                getString(R.string.windformat, result?.current?.wind_speed?.toInt().toString())
-            tvHumidityDesc.text = getString(R.string.percentformat, result?.current?.humidity)
-            tvPressureDesc.text =
-                getString(R.string.pressureformat, result?.current?.pressure.toString())
-            tvCloudinessDesc.text = getString(R.string.percentformat, result?.current?.clouds)
-            tvSunriseDesc.text = DateTimeUtils.formatDate(result?.current?.sunrise)
-            tvSunsetDesc.text = DateTimeUtils.formatDate(result?.current?.sunset)
+            presenter?.getSavedData()?.observe(this, androidx.lifecycle.Observer {
+                if (it.isNotEmpty()) {
+                    val result = it.first()
+                    adapter.update(result.daily)
+                    adapter.update(result?.daily)
+                    tvLocation.text = result?.timezone
+                    tvCurrentTemp.text =
+                        getString(R.string.degreeformat, result?.current?.temp?.toInt().toString())
+                    tvFeelsTemp.text =
+                        getString(R.string.degreeformat, result?.current?.feels_like?.toInt().toString())
+                    tvWindDesc.text =
+                        getString(R.string.windformat, result?.current?.wind_speed?.toInt().toString())
+                    tvHumidityDesc.text = getString(R.string.percentformat, result?.current?.humidity)
+                    tvPressureDesc.text =
+                        getString(R.string.pressureformat, result?.current?.pressure.toString())
+                    tvCloudinessDesc.text = getString(R.string.percentformat, result?.current?.clouds)
+                    tvSunriseDesc.text = DateTimeUtils.formatDate(result?.current?.sunrise)
+                    tvSunsetDesc.text = DateTimeUtils.formatDate(result?.current?.sunset)
 
-            tvCurrentWeatherDesc.text = result?.current?.weather?.first()?.description
-            val image = result?.current?.weather?.first()?.icon
-            Picasso.get().load("http://openweathermap.org/img/w/$image.png").into(ivWeatherImage)
+                    tvCurrentWeatherDesc.text = result?.current?.weather?.first()?.description
+                    val image = result?.current?.weather?.first()?.icon
+                    Picasso.get().load("http://openweathermap.org/img/w/$image.png").into(ivWeatherImage)
 
-            hideProgressBar()
+                    hideProgressBar()
+                } })
         }
     }
 

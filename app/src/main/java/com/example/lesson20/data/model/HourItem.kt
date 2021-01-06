@@ -1,6 +1,12 @@
-package com.example.lesson20.data.model.forecast
+package com.example.lesson20.data.model
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+@Entity
 data class HourItem(
+    @PrimaryKey(autoGenerate = true)
+    val id: Int,
     val dt: Int,
     val temp: Double,
     val feels_like: Double,

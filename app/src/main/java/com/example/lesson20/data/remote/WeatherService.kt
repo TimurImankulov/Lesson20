@@ -1,6 +1,6 @@
-package com.example.lesson20.data.model
+package com.example.lesson20.data.remote
 
-import com.example.lesson20.data.model.forecast.ForecastModel
+import com.example.lesson20.data.model.ForecastModel
 import retrofit2.http.GET
 import retrofit2.http.Query
 

@@ -2,7 +2,10 @@ package com.example.lesson20.ui.main
 
 import android.location.Location
 import android.util.Log
-import com.example.lesson20.data.model.RetrofitBuilder
+import androidx.lifecycle.LiveData
+import com.example.lesson20.WeatherApp
+import com.example.lesson20.data.model.ForecastModel
+import com.example.lesson20.data.remote.RetrofitBuilder
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
@@ -17,11 +20,21 @@ class MainPresenter:MainContract.Presenter {
                     location.latitude.toString(), location.longitude.toString(), "minutely",
                     key, "metric")
 
-                view?.fillViews(result)
+                updateDB(result)
             }.onFailure {
                 Log.e("NETWORK", "NO DATA")
                 view?.hideProgressBar()
             }
+        }
+    }
+
+    override fun getSavedData(): LiveData<List<ForecastModel>>? {
+        return WeatherApp.getApp()?.getDB()?.getDao()?.getAll()
+    }
+
+    private fun updateDB(result: ForecastModel?) {
+        result?.let {
+            WeatherApp.getApp()?.getDB()?.getDao()?.addForcast(it)
         }
     }
 

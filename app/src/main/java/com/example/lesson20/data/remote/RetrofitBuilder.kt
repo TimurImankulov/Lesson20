@@ -1,4 +1,4 @@
-package com.example.lesson20.data.model
+package com.example.lesson20.data.remote
 
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
