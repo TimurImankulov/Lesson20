@@ -41,6 +41,5 @@ class RvHolder(view: View) : RecyclerView.ViewHolder(view) {
         itemView.tvRvTemp.text = itemView.context.getString(R.string.degreeformat,dayItem.temp.day.toInt().toString())
         itemView.tvRvMaxTemp.text = itemView.context.getString(R.string.degreeformat,dayItem.temp.max.toInt().toString())
         itemView.tvRvMinTemp.text = itemView.context.getString(R.string.degreeformat,dayItem.temp.min.toInt().toString())
-
     }
 }
