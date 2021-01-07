@@ -102,7 +102,6 @@ class MainActivity : AppCompatActivity(), MainContract.View {
             presenter?.getSavedData()?.observe(this, androidx.lifecycle.Observer {
                 if (it.isNotEmpty()) {
                     val result = it.first()
-                    adapter.update(result.daily)
                     adapter.update(result?.daily)
                     tvLocation.text = result?.timezone
                     tvCurrentTemp.text =

@@ -12,7 +12,7 @@ data class ForecastModel (
     val timezone: String,
     val timezone_offset: Int,
     val current: ForecastCurrent,
-    val minutely: List<MinuteItem>,
+    val minutely: List<MinuteItem>?,
     val hourly: List<HourItem>,
     val daily: List<DayItem>
 )

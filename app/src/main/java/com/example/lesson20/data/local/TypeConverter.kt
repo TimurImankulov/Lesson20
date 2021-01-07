@@ -11,7 +11,7 @@ object TypeConverter {
 
     @JvmStatic
     @TypeConverter
-    fun dayItemToString(model: List<DayItem>): String {
+    fun dayItemToString(model: List<DayItem>?): String? {
         return Gson().toJson(model)
     }
 
@@ -25,7 +25,7 @@ object TypeConverter {
 
     @JvmStatic
     @TypeConverter
-    fun forecastCurrentToString(model: ForecastCurrent): String {
+    fun forecastCurrentToString(model: ForecastCurrent?): String? {
         return Gson().toJson(model)
     }
 
@@ -39,7 +39,7 @@ object TypeConverter {
 
     @JvmStatic
     @TypeConverter
-    fun forecastFeelToString(model: ForecastFeel): String {
+    fun forecastFeelToString(model: ForecastFeel?): String? {
         return Gson().toJson(model)
     }
 
@@ -53,7 +53,7 @@ object TypeConverter {
 
     @JvmStatic
     @TypeConverter
-    fun forecastTempToString(model: ForecastTemp): String {
+    fun forecastTempToString(model: ForecastTemp?): String? {
         return Gson().toJson(model)
     }
 
@@ -67,7 +67,7 @@ object TypeConverter {
 
     @JvmStatic
     @TypeConverter
-    fun hourItemToString(model: List<HourItem>): String {
+    fun hourItemToString(model: List<HourItem>?): String? {
         return Gson().toJson(model)
     }
 
@@ -81,7 +81,7 @@ object TypeConverter {
 
     @JvmStatic
     @TypeConverter
-    fun minuteItemToString(model: List<MinuteItem>): String {
+    fun minuteItemToString(model: List<MinuteItem>?): String? {
         return Gson().toJson(model)
     }
 
@@ -95,7 +95,7 @@ object TypeConverter {
 
     @JvmStatic
     @TypeConverter
-    fun weatherItemToString(model: List<WeatherItem>): String {
+    fun weatherItemToString(model: List<WeatherItem>?): String? {
         return Gson().toJson(model)
     }
 

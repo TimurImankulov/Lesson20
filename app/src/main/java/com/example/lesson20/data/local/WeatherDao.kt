@@ -1,15 +1,12 @@
 package com.example.lesson20.data.local
 
 import androidx.lifecycle.LiveData
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.Query
-import androidx.room.Transaction
+import androidx.room.*
 import com.example.lesson20.data.model.ForecastModel
 
 @Dao
 interface WeatherDao {
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun add(data : ForecastModel)
 
     @Query("SELECT * FROM ForecastModel")
@@ -23,6 +20,4 @@ interface WeatherDao {
         deleteAll()
         add(data)
     }
-
-
 }
